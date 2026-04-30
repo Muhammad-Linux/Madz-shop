@@ -6,218 +6,105 @@
     <title>Madz Official Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --main-color: #00eaff;
-        }
+        :root { --main-color: #00eaff; }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Orbitron', sans-serif;
             color: var(--main-color);
-            transition: color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, text-shadow 0.5s ease;
+            transition: color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
         }
 
-        body {
-            background: black;
-            overflow-x: hidden;
-        }
+        body { background: black; overflow-x: hidden; }
 
         video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            min-width: 100%;
-            min-height: 100%;
-            object-fit: cover;
-            z-index: -2;
+            position: fixed; top: 0; left: 0; min-width: 100%; min-height: 100%;
+            object-fit: cover; z-index: -2;
         }
 
         .overlay {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: -1;
+            position: fixed; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: -1;
         }
 
-        /* --- LOADING RGB STYLE --- */
         #loading {
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            background: black;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
+            position: fixed; width: 100%; height: 100vh; background: black;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999;
         }
 
         .loader {
-            width: 80px;
-            height: 80px;
-            border: 8px solid #ff0000;
-            border-top: 8px solid transparent;
-            border-radius: 50%;
+            width: 80px; height: 80px; border: 8px solid #ff0000;
+            border-top: 8px solid transparent; border-radius: 50%;
             animation: spin 1s linear infinite, rgb-flow 3s linear infinite;
             margin-bottom: 25px;
-            box-shadow: 0 0 20px rgba(255,0,0,0.5);
-        }
-
-        .loading-text {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            animation: rgb-flow 3s linear infinite;
-            text-shadow: 0 0 10px currentColor;
         }
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
-
         @keyframes rgb-flow {
-            0% { color: #ff0000; border-color: #ff0000; border-top-color: transparent; filter: hue-rotate(0deg); }
-            100% { color: #ff0000; border-color: #ff0000; border-top-color: transparent; filter: hue-rotate(360deg); }
+            0% { color: #ff0000; border-color: #ff0000; filter: hue-rotate(0deg); }
+            100% { color: #ff0000; border-color: #ff0000; filter: hue-rotate(360deg); }
         }
 
-        header {
-            text-align: center;
-            padding: 40px;
-            font-size: 35px;
-            text-shadow: 0 0 30px var(--main-color);
-        }
+        header { text-align: center; padding: 40px; font-size: 30px; text-shadow: 0 0 20px var(--main-color); }
 
-        .nav {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-            padding: 0 10px;
-        }
-
+        .nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
         .nav button {
-            padding: 10px 20px;
-            border: 1px solid var(--main-color);
-            background: transparent;
-            border-radius: 10px;
-            cursor: pointer;
-            color: var(--main-color);
-            font-size: 12px;
-            font-weight: bold;
+            padding: 10px 15px; border: 1px solid var(--main-color); background: transparent;
+            border-radius: 8px; cursor: pointer; font-size: 11px;
         }
+        .nav button:hover { background: var(--main-color); color: black; }
 
-        .nav button:hover {
-            background: var(--main-color);
-            color: black;
-        }
+        .section { padding: 20px; display: none; max-width: 1000px; margin: 0 auto; }
+        .active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .section {
-            padding: 20px;
-            display: none;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            text-shadow: 0 0 15px var(--main-color);
-        }
-
-        .menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
+        .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
 
         .card {
-            background: rgba(0,0,0,0.6);
-            border: 1px solid var(--main-color);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            line-height: 1.4;
+            background: rgba(0,0,0,0.6); border: 1px solid var(--main-color);
+            padding: 20px; border-radius: 15px; text-align: center;
         }
-
-        .card h3 {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
-        .card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 25px var(--main-color);
-        }
-
+        .card:hover { transform: scale(1.03); box-shadow: 0 0 20px var(--main-color); }
         .price { margin: 10px 0; font-size: 1.2rem; font-weight: bold; }
 
         .btn {
-            display: inline-block;
-            padding: 8px 15px;
-            background: var(--main-color);
-            color: black !important;
-            border-radius: 8px;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 0 10px var(--main-color);
+            display: inline-block; padding: 8px 15px; background: var(--main-color);
+            color: black !important; border-radius: 8px; cursor: pointer; font-weight: bold; border: none;
         }
-
-        .benefit {
-            background: rgba(0,0,0,0.7);
-            border: 1px solid var(--main-color);
-            padding: 20px;
-            margin: 30px 0;
-            border-radius: 15px;
-        }
-
-        .benefit h3 { margin-bottom: 15px; text-decoration: underline; }
-        .benefit ul { padding-left: 10px; line-height: 1.8; list-style: none; }
-        .benefit li::before { content: "⚡ "; }
 
         .recommend { border: 2px solid var(--main-color); position: relative; }
         .recommend::after {
-            content: "Rekomendasi";
-            position: absolute;
-            top: -10px;
-            right: 10px;
-            background: var(--main-color);
-            color: #000;
-            font-size: 9px;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-weight: 900;
+            content: "HOT"; position: absolute; top: -10px; right: 10px;
+            background: var(--main-color); color: #000; font-size: 9px; padding: 2px 8px; border-radius: 10px;
         }
 
-        #snow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
-
-        .popup {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 1000;
+        .benefit-area {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px 50px 20px;
         }
 
-        .popup-box { background: black; border: 1px solid var(--main-color); padding: 30px; border-radius: 15px; text-align: center; }
-
-        .visitor { position: fixed; bottom: 20px; left: 20px; background: black; border: 1px solid var(--main-color); padding: 8px 15px; border-radius: 8px; font-size: 12px; }
-
-        .music-btn {
-            position: fixed; bottom: 20px; right: 20px; background: var(--main-color); color: black !important;
-            padding: 10px 15px; border-radius: 10px; cursor: pointer; box-shadow: 0 0 15px var(--main-color); font-weight: bold; font-size: 12px;
+        .benefit-box {
+            background: rgba(0,0,0,0.7); border: 1px solid var(--main-color);
+            padding: 20px; border-radius: 15px;
+            display: none;
         }
+        .benefit-box.active { display: block; animation: fadeIn 0.5s; }
+        
+        .benefit-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 15px; 
+            font-size: 0.85rem;
+            margin-top: 15px;
+            text-align: left;
+        }
+        
+        .benefit-item strong { display: block; margin-bottom: 5px; color: var(--main-color); }
+        .benefit-item ul { list-style: '✔ '; padding-left: 20px; }
 
-        footer { text-align: center; padding: 50px 20px; font-size: 12px; opacity: 0.8; }
+        .visitor { position: fixed; bottom: 20px; left: 20px; background: black; border: 1px solid var(--main-color); padding: 5px 10px; border-radius: 5px; font-size: 10px; }
+        .music-btn { position: fixed; bottom: 20px; right: 20px; background: var(--main-color); color: black !important; padding: 10px; border-radius: 50%; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -226,164 +113,200 @@
         <source src="https://raw.githubusercontent.com/RahmadPasker/dat1/main/uploads/alip-clutch-1772885312747.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
-    <canvas id="snow"></canvas>
 
     <div id="loading">
         <div class="loader"></div>
-        <h3 class="loading-text"> MADZ OFFICIAL</h3>
+        <h3 class="loading-text">MADZ OFFICIAL</h3>
     </div>
 
-    <header>MADZ OFFICIAL STORE</header>
+    <header>MADZ STORE</header>
 
     <div class="nav">
-        <button onclick="showMenu('panel')">MENU PANEL</button>
-        <button onclick="showMenu('bot')">MENU SEWA</button>
-        <button onclick="showMenu('script')">MENU SCRIPT</button>
+        <button onclick="showMenu('panel', '#00eaff')">MENU PANEL</button>
+        <button onclick="showMenu('bot', '#00ff00')">MENU SEWA</button>
+        <button onclick="showMenu('script', '#ff0000')">MENU SCRIPT</button>
     </div>
 
+    <!-- CONTENT SECTIONS -->
     <section id="panel" class="section active">
-        <h2>MENU PANEL LEGAL</h2>
         <div class="menu">
-            <div class="card"><h3>1GB RAM<br>UNLIMITED DISK<br>100% CPU</h3><div class="price">6.000</div><button class="btn">Order</button></div>
-            <div class="card"><h3>2GB RAM<br>UNLIMITED DISK<br>130% CPU</h3><div class="price">10.000</div><button class="btn">Order</button></div>
-            <div class="card"><h3>3GB RAM<br>UNLIMITED DISK<br>150% CPU</h3><div class="price">12.000</div><button class="btn">Order</button></div>
-            <div class="card"><h3>4GB RAM<br>UNLIMITED DISK<br>180% CPU</h3><div class="price">14.000</div><button class="btn">Order</button></div>
-            <div class="card recommend"><h3>5GB RAM<br>UNLIMITED DISK<br>200% CPU</h3><div class="price">16.000</div><button class="btn">Order</button></div>
-            <div class="card"><h3>6GB RAM<br>UNLIMITED DISK<br>250% CPU</h3><div class="price">18.000</div><button class="btn">Order</button></div>
-            <div class="card"><h3>7GB RAM<br>UNLIMITED DISK<br>300% CPU</h3><div class="price">20.000</div><button class="btn">Order</button></div>
-            <div class="card"><h3>8GB RAM<br>UNLIMITED DISK<br>350% CPU</h3><div class="price">22.000</div><button class="btn">Order</button></div>
-            <div class="card"><h3>9GB RAM<br>UNLIMITED DISK<br>400% CPU</h3><div class="price">24.000</div><button class="btn">Order</button></div>
-            <div class="card"><h3>10GB RAM<br>UNLIMITED DISK<br>450% CPU</h3><div class="price">26.000</div><button class="btn">Order</button></div>
-            <div class="card recommend"><h3>UNLIMITED RAM<br>UNLIMITED DISK<br>UNLIMITED CPU</h3><div class="price">35.000</div><button class="btn">Order</button></div>
-        </div>
-        <div class="benefit">
-            <h3>BENEFIT PANEL LEGAL</h3>
-            <ul>
-                <li>Anti Delay</li>
-                <li>Garansi 25 Hari</li>
-                <li>Panel Aktif Full 30 Hari</li>
-                <li>Panel Private</li>
-                <li>Anti Curi Script / Intip</li>
-                <li>Bisa Diperpanjang</li>
-                <li>Anti DDoS</li>
-            </ul>
+            <div class="card"><h3>2GB RAM</h3><div class="price">8.000</div><button class="btn">Order</button></div>
+            <div class="card"><h3>3GB RAM</h3><div class="price">10.000</div><button class="btn">Order</button></div>
+            <div class="card"><h3>4GB RAM</h3><div class="price">12.000</div><button class="btn">Order</button></div>
+            <div class="card"><h3>5GB RAM</h3><div class="price">14.000</div><button class="btn">Order</button></div>
+            <div class="card recommend"><h3>6GB RAM</h3><div class="price">16.000</div><button class="btn">Order</button></div>
+            <div class="card"><h3>7GB RAM</h3><div class="price">18.000</div><button class="btn">Order</button></div>
+            <div class="card"><h3>8GB RAM</h3><div class="price">20.000</div><button class="btn">Order</button></div>
+            <div class="card"><h3>9GB RAM</h3><div class="price">22.000</div><button class="btn">Order</button></div>
+            <div class="card"><h3>10GB RAM</h3><div class="price">24.000</div><button class="btn">Order</button></div>
+            <div class="card"><h3>15GB RAM</h3><div class="price">30.000</div><button class="btn">Order</button></div>
+            <div class="card recommend"><h3>20GB RAM</h3><div class="price">35.000</div><button class="btn">Order</button></div>
+            <div class="card recommend"><h3>UNLIMITED RAM</h3><div class="price">45.000</div><button class="btn">Order</button></div>
         </div>
     </section>
 
     <section id="bot" class="section">
-        <h2>MENU SEWA BOT</h2>
         <div class="menu">
             <div class="card"><h3>Sewa 1 Bulan</h3><div class="price">20.000</div><button class="btn">Order</button></div>
-            <div class="card recommend"><h3>Sewa 3 Bulan</h3><div class="price">50.000</div><button class="btn">Order</button></div>
-            <div class="card"><h3>Sewa 6 Bulan</h3><div class="price">80.000</div><button class="btn">Order</button></div>
-            <div class="card recommend"><h3>Sewa 1 Tahun</h3><div class="price">120.000</div><button class="btn">Order</button></div>
-        </div>
-        <div class="benefit">
-            <h3>BENEFIT SEWA BOT</h3>
-            <ul>
-                <li>Bisa dipakai di Grup</li>
-                <li>Banyak fitur game & AI Chat</li>
-                <li>Downloader TikTok / YouTube</li>
-                <li>Anti Link & Welcome Message</li>
-                <li>Request Fitur & Support 24 Jam</li>
-            </ul>
+            <div class="card"><h3>Sewa 2 Bulan</h3><div class="price">35.000</div><button class="btn">Order</button></div>
+            <div class="card"><h3>Sewa 4 Bulan</h3><div class="price">60.000</div><button class="btn">Order</button></div>
+            <div class="card recommend"><h3>Sewa 6 Bulan</h3><div class="price">80.000</div><button class="btn">Order</button></div>
+            <div class="card"><h3>Sewa 8 Bulan</h3><div class="price">110.000</div><button class="btn">Order</button></div>
+            <div class="card"><h3>Sewa 10 Bulan</h3><div class="price">130.000</div><button class="btn">Order</button></div>
+            <div class="card recommend"><h3>Sewa 12 Bulan</h3><div class="price">150.000</div><button class="btn">Order</button></div>
         </div>
     </section>
 
     <section id="script" class="section">
-        <h2>MENU SCRIPT</h2>
         <div class="menu">
             <div class="card recommend"><h3>Script Bot (No Enc)</h3><div class="price">100.000</div><button class="btn">Order</button></div>
         </div>
-        <div class="benefit">
-            <h3>BENEFIT SCRIPT BOT</h3>
-            <ul>
-                <li>FREE UPDATE SELAMANYA</li>
-                <li>MASUK GRUP INFO UPDATE</li>
-                <li>BEBAS RENAME FITUR (NO ENC)</li>
-                <li>FREE RESELLER PANEL LEGAL</li>
-                <li>BIMBINGAN OWNER LANGSUNG</li>
-                <li>FITUR 1400+ SIAP PAKAI</li>
-            </ul>
-        </div>
     </section>
 
-    <div class="popup" id="popup">
-        <div class="popup-box"><h3>Memproses Order...</h3></div>
+    <!-- DIFFERENTIATED BENEFIT AREA -->
+    <div class="benefit-area">
+        <!-- Benefit Panel -->
+        <div id="benefit-panel" class="benefit-box active">
+            <h3 style="text-align: center; margin-bottom: 20px; text-decoration: underline;">⚡ BENEFIT PANEL PTERODACTYL ⚡</h3>
+            <div class="benefit-grid">
+                <div class="benefit-item">
+                    <strong>🚀 SPEED & UPTIME</strong>
+                    <ul>
+                        <li>Full Speed Network 1Gbps</li>
+                        <li>Anti Delay / No Lag</li>
+                        <li>Uptime 99.9% Nonstop</li>
+                    </ul>
+                </div>
+                <div class="benefit-item">
+                    <strong>🛡️ SECURITY</strong>
+                    <ul>
+                        <li>Anti DDoS Protection</li>
+                        <li>Private Panel Login</li>
+                        <li>Auto Backup System</li>
+                    </ul>
+                </div>
+                <div class="benefit-item">
+                    <strong>💎 SERVICE</strong>
+                    <ul>
+                        <li>Garansi 25 Hari</li>
+                        <li>Free Reinstall</li>
+                        <li>Owner Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefit Sewa Bot -->
+        <div id="benefit-bot" class="benefit-box">
+            <h3 style="text-align: center; margin-bottom: 20px; text-decoration: underline;">⚡ BENEFIT SEWA BOT PREMIUM ⚡</h3>
+            <div class="benefit-grid">
+                <div class="benefit-item">
+                    <strong>👑 ACCESS LEVEL</strong>
+                    <ul>
+                        <li>Akses Fitur Premium</li>
+                        <li>Unlock All Commands</li>
+                        <li>Get Owner Authority</li>
+                        <li>Auto Welcome/Left</li>
+                    </ul>
+                </div>
+                <div class="benefit-item">
+                    <strong>🎨 CUSTOMIZATION</strong>
+                    <ul>
+                        <li>Set Menu</li>
+                        <li>Custom Watermark</li>
+                        <li>Akses Premium User</li>
+                        <li>Bot Aktif 24 Jam</li>
+                    </ul>
+                </div>
+                <div class="benefit-item">
+                    <strong>📞 PRIORITY</strong>
+                    <ul>
+                        <li>Fast Response Support</li>
+                        <li>Prioritas Update Fitur</li>
+                        <li>Anti Banned System</li>
+                        <li>Garansi Aktif Full</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefit Script Bot -->
+        <div id="benefit-script" class="benefit-box">
+            <h3 style="text-align: center; margin-bottom: 20px; text-decoration: underline;">⚡ BENEFIT SCRIPT BOT MADZ ⚡</h3>
+            <div class="benefit-grid">
+                <div class="benefit-item">
+                    <strong>🔥 FEATURE PACK</strong>
+                    <ul>
+                        <li>1500+ Fitur Aktif</li>
+                        <li>Menu AI, Downloader, Game</li>
+                        <li>No Encrypt (Bebas Edit)</li>
+                        <li>Fitur RPG & Social</li>
+                    </ul>
+                </div>
+                <div class="benefit-item">
+                    <strong>⚙️ SYSTEM QUALITY</strong>
+                    <ul>
+                        <li>Clean Code & Ringan</li>
+                        <li>Auto Pairing Code</li>
+                        <li>Support Multi Device</li>
+                        <li>Anti Error Code</li>
+                    </ul>
+                </div>
+                <div class="benefit-item">
+                    <strong>🎁 EXTRAS</strong>
+                    <ul>
+                        <li>Lifetime Update</li>
+                        <li>Tutorial Pemasangan</li>
+                        <li>Free Konsultasi Script</li>
+                        <li>Akses Grup Buyer</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 20px; font-style: italic; font-size: 0.75rem;">*Kepuasan Pelanggan Adalah Prioritas Kami.*</p>
     </div>
 
-    <div class="visitor">👥️ Pengunjung : <span id="visits">0</span></div>
-
-    <footer>© 2024 - 2026 Madz Official | All Rights Reserved</footer>
-
+    <div class="visitor">👥 Pengunjung: <span id="visits">0</span></div>
+    <div class="music-btn" onclick="toggleMusic()">🎵</div>
     <audio id="music" autoplay loop>
         <source src="https://raw.githubusercontent.com/RahmadPasker/dat3/main/uploads/alip-clutch-1772907839316.mp3" type="audio/mpeg">
     </audio>
-    <div class="music-btn" onclick="toggleMusic()">🎵 Music</div>
 
     <script>
-        window.addEventListener("load", () => {
-            setTimeout(() => { document.getElementById("loading").style.display="none"; }, 3000);
-        });
+        window.onload = () => {
+            setTimeout(() => { document.getElementById("loading").style.display="none"; }, 2000);
+            let v = localStorage.getItem("v_madz") || 0;
+            v++; localStorage.setItem("v_madz", v);
+            document.getElementById("visits").innerText = v;
+        };
 
-        function showMenu(menuId){
-            document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
-            document.getElementById(menuId).classList.add("active");
-
-            let warna;
-            if(menuId === 'panel') warna = "#00eaff";
-            else if(menuId === 'bot') warna = "#00ff00";
-            else if(menuId === 'script') warna = "#ff0000";
+        function showMenu(id, color) {
+            // Hide all sections
+            document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+            document.getElementById(id).classList.add("active");
             
-            document.documentElement.style.setProperty('--main-color', warna);
+            // Hide all benefit boxes
+            document.querySelectorAll(".benefit-box").forEach(b => b.classList.remove("active"));
+            document.getElementById("benefit-" + id).classList.add("active");
+            
+            document.documentElement.style.setProperty('--main-color', color);
         }
 
         document.querySelectorAll(".btn").forEach(btn => {
             btn.onclick = function() {
-                let card = this.closest(".card");
-                let nama = card.querySelector("h3").innerText.replace(/\n/g, " ");
-                let harga = card.querySelector(".price").innerText;
-                document.getElementById("popup").style.display = "flex";
-                setTimeout(() => {
-                    let pesan = `Assalamualaikum Bang Madz\nSaya ingin order:\n\nProduk: ${nama}\nHarga: ${harga}`;
-                    window.open("https://wa.me/62895382705858?text=" + encodeURIComponent(pesan));
-                    document.getElementById("popup").style.display = "none";
-                }, 1000);
+                let nama = this.closest(".card").querySelector("h3").innerText;
+                let harga = this.closest(".card").querySelector(".price").innerText;
+                let pesan = `P Bang Madz
+Gua mau order:
+Produk: ${nama}
+Harga: ${harga}`;
+                window.open("https://wa.me/62895382705858?text=" + encodeURIComponent(pesan));
             }
         });
 
         let m = document.getElementById("music");
         function toggleMusic() { m.paused ? m.play() : m.pause(); }
-
-        let v = localStorage.getItem("v_madz") || 0;
-        v++; localStorage.setItem("v_madz", v);
-        document.getElementById("visits").innerText = v;
-
-        const canvas = document.getElementById("snow");
-        const ctx = canvas.getContext("2d");
-        
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        let flakes = [];
-        for(let i=0; i<150; i++) flakes.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*3+1, s: Math.random()*1+0.5});
-        
-        function draw() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--main-color');
-            ctx.globalAlpha = 0.5;
-            flakes.forEach(f => {
-                ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI*2); ctx.fill();
-                f.y += f.s; if(f.y > canvas.height) f.y = -5;
-            });
-            ctx.globalAlpha = 1.0;
-            requestAnimationFrame(draw);
-        }
-        draw();
     </script>
 </body>
 </html>
